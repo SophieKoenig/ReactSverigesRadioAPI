@@ -14,7 +14,7 @@ const App = () => {
   const [count, setCount] = useState(0);
 
   const fetchStations = async () => {
-    return fetch("http://api.sr.se/api/v2/channels?format=json")
+    return fetch("https://api.sr.se/api/v2/channels?format=json")
       .then((response) => response.json())
       .then((data) => data.channels)
       .catch((error) => console.error(error));
