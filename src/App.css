@@ -35,6 +35,8 @@ audio {
   top: 20vh;
   left: 30vw;
   font-size: 3rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .rightArrow {
@@ -43,6 +45,8 @@ audio {
   top: 20vh;
   left: 63.5vw;
   font-size: 3rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
 @media (max-width: 600px) {
