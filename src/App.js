@@ -67,8 +67,6 @@ const App = () => {
     <div>
       <h1>Sverige Radio</h1>
       <h4>Lyssna direkt på Sveriges Radio</h4>
-          <p src={stations}></p>
-          <p src={taglineSrc}></p>
       {/* <p>You clicked {count} times</p> */}
       <AiOutlineArrowLeft className="leftArrow" onClick={() => minusClick()} />
       <AiOutlineArrowRight className="rightArrow" onClick={() => plusClick()} />
