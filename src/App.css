@@ -3,14 +3,26 @@
 }
 
 h1,
-h4,
-p {
+h4 {
   color: ivory;
   font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+}
+
+.imgArrowWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.leftArrow,
+.rightArrow {
+  flex: 1;
+  cursor: pointer;
+  color: ivory;
+  margin: 5px;
 }
 
 img,
@@ -21,44 +33,24 @@ audio {
 }
 
 img {
-  width: 25%;
-  //margin-top: -3rem;
+  width: 100%;
+  max-width: 500px;
   border-radius: 20%;
 }
 
 audio {
-  width: 18%;
-}
-
-.leftArrow {
-  color: ivory;
-  position: relative;
-  top: 20vh;
-  left: 30vw;
-  font-size: 3rem;
-  cursor: pointer;
-  cursor: hand;
-}
-
-.rightArrow {
-  color: ivory;
-  position: relative;
-  top: 20vh;
-  left: 62.8vw;
-  font-size: 3rem;
-  cursor: pointer;
-  cursor: hand;
+  width: 100%;
+  max-width: 250px;
 }
 
 @media (max-width: 600px) {
-  .leftArrow {
-    font-size: 1rem;
-    top: 6vh;
-    left: 25vw;
+  img {
+    width: 50%;
+    max-width: none;
   }
-  .rightArrow {
-    font-size: 1rem;
-    top: 6vh;
-    left: 69vw;
+
+  audio {
+    width: 50%;
+    max-width: none;
   }
 }
