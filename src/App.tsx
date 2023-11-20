@@ -15,7 +15,6 @@ const App: React.FC = () => {
   const [stations, setStations] = useState<Station[]>([]);
   const [imgSrc, setImgSrc] = useState<string>("");
   const [audioSrc, setAudioSrc] = useState<string>("");
-  const [taglineSrc, setTaglineSrc] = useState<string>("");
   const [count, setCount] = useState<number>(0);
 
   const fetchStations = async (): Promise<Station[]> => {
@@ -37,7 +36,6 @@ const App: React.FC = () => {
       setStations(fetchedData);
       setImgSrc(fetchedData[0].image);
       setAudioSrc(fetchedData[0].liveaudio.url);
-      setTaglineSrc(fetchedData[0].tagline);
       console.log(fetchedData);
     };
 
@@ -48,12 +46,10 @@ const App: React.FC = () => {
     if (count === 9) {
       setCount(0);
       setImgSrc(stations[0].image);
-      setTaglineSrc(stations[0].tagline);
       setAudioSrc(stations[0].liveaudio.url);
     } else {
       setCount(count + 1);
       setImgSrc(stations[count + 1].image);
-      setTaglineSrc(stations[count + 1].tagline);
       setAudioSrc(stations[count + 1].liveaudio.url);
     }
   };
@@ -62,12 +58,10 @@ const App: React.FC = () => {
     if (count === 0) {
       setCount(stations.length - 1);
       setImgSrc(stations[stations.length - 1].image);
-      setTaglineSrc(stations[stations.length - 1].tagline);
       setAudioSrc(stations[stations.length - 1].liveaudio.url);
     } else {
       setCount(count - 1);
       setImgSrc(stations[count - 1].image);
-      setTaglineSrc(stations[count - 1].tagline);
       setAudioSrc(stations[count - 1].liveaudio.url);
     }
   };
