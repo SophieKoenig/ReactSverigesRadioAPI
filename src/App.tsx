@@ -7,8 +7,6 @@ interface Station {
   liveaudio: {
     url: string;
   };
-  tagline: string;
-  // Add other properties based on your actual data structure
 }
 
 const App: React.FC = () => {
