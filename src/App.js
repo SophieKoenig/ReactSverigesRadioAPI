@@ -11,6 +11,7 @@ const App = () => {
   const [stations, setStations] = useState([]);
   const [imgSrc, setImgSrc] = useState("");
   const [audioSrc, setAudioSrc] = useState("");
+  const [taglineSrc, setTaglineSrc] = useState("");
   const [count, setCount] = useState(0);
 
   const fetchStations = async () => {
@@ -27,6 +28,7 @@ const App = () => {
       setStations(fetchedData);
       setImgSrc(fetchedData[0].image);
       setAudioSrc(fetchedData[0].liveaudio.url);
+      setTaglineSrc(fetchedData[0].tagline);
       console.log(fetchedData);
     }
 
@@ -36,11 +38,13 @@ const App = () => {
   const plusClick = () => {
     if (count === 9) {
       setCount(0);
-      setImgSrc(stations[0].image);
+        setImgSrc(stations[0].image);
+        setTaglineSrc(stations[0].tagline);
       setAudioSrc(stations[0].liveaudio.url);
     } else {
       setCount(count + 1);
-      setImgSrc(stations[count + 1].image);
+       setImgSrc(stations[count + 1].image);
+       setTaglineSrc(stations[count + 1].tagline);
       setAudioSrc(stations[count + 1].liveaudio.url);
     }
   };
@@ -48,11 +52,13 @@ const App = () => {
   const minusClick = () => {
     if (count === 0) {
       setCount(stations.length - 1);
-      setImgSrc(stations[stations.length - 1].image);
+        setImgSrc(stations[stations.length - 1].image);
+        setTaglineSrc(stations[stations.length - 1].tagline);
       setAudioSrc(stations[stations.length - 1].liveaudio.url);
     } else {
       setCount(count - 1);
-      setImgSrc(stations[count - 1].image);
+        setImgSrc(stations[count - 1].image);
+        setTaglineSrc(stations[count - 1].tagline);
       setAudioSrc(stations[count - 1].liveaudio.url);
     }
   };
@@ -61,7 +67,8 @@ const App = () => {
     <div>
       <h1>Sverige Radio</h1>
       <h4>Lyssna direkt på Sveriges Radio</h4>
-      <p src={stations}></p>
+          <p src={stations}></p>
+          <p src={taglineSrc}></p>
       {/* <p>You clicked {count} times</p> */}
       <AiOutlineArrowLeft className="leftArrow" onClick={() => minusClick()} />
       <AiOutlineArrowRight className="rightArrow" onClick={() => plusClick()} />
