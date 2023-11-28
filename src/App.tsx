@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
+//image declared as string because property contains an URL
 interface Station {
   image: string;
   liveaudio: {
@@ -28,40 +29,37 @@ const App: React.FC = () => {
     }
   };
 
+  //following function returns an array with at least one station
+  //by checking the length of fetched data array ensure initial station is properly displayed
   useEffect(() => {
     const init = async () => {
       const fetchedData = await fetchStations();
-      setStations(fetchedData);
-      setImgSrc(fetchedData[0].image);
-      setAudioSrc(fetchedData[0].liveaudio.url);
       console.log(fetchedData);
+
+      if (fetchedData.length > 0) {
+        setStations(fetchedData);
+        setImgSrc(fetchedData[0].image);
+        setAudioSrc(fetchedData[0].liveaudio.url);
+      } else {
+        // Handle the case where no stations are fetched
+        console.error("No stations fetched.");
+      }
     };
 
     init();
   }, []);
 
-  const plusClick = () => {
-    if (count === 9) {
-      setCount(0);
-      setImgSrc(stations[0].image);
-      setAudioSrc(stations[0].liveaudio.url);
-    } else {
-      setCount(count + 1);
-      setImgSrc(stations[count + 1].image);
-      setAudioSrc(stations[count + 1].liveaudio.url);
-    }
+  //combined state-setting calls to simplify the code (otherwise repetition of different states like 'imgSrc' & 'audioSrc')
+  const updateStation = (newCount: number) => {
+    setCount(newCount);
+    setImgSrc(stations[newCount].image);
+    setAudioSrc(stations[newCount].liveaudio.url);
   };
 
-  const minusClick = () => {
-    if (count === 0) {
-      setCount(stations.length - 1);
-      setImgSrc(stations[stations.length - 1].image);
-      setAudioSrc(stations[stations.length - 1].liveaudio.url);
-    } else {
-      setCount(count - 1);
-      setImgSrc(stations[count - 1].image);
-      setAudioSrc(stations[count - 1].liveaudio.url);
-    }
+  //a function with a parameter that determines the direction (before I had two functions for + and one for - direction) to reduce code duplication
+  const handleArrowClick = (direction: number) => {
+    const newCount = (count + direction + stations.length) % stations.length;
+    updateStation(newCount);
   };
 
   return (
@@ -69,9 +67,15 @@ const App: React.FC = () => {
       <h1>Sverige Radio</h1>
       <h4>Lyssna direkt på Sveriges Radio</h4>
       <div className="imgArrowWrapper">
-      <AiOutlineArrowLeft className="leftArrow" onClick={minusClick} />
-      <img src={imgSrc} alt="" />
-      <AiOutlineArrowRight className="rightArrow" onClick={plusClick} />
+        <AiOutlineArrowLeft
+          className="leftArrow"
+          onClick={() => handleArrowClick(-1)}
+        />
+        <img src={imgSrc} alt="" />
+        <AiOutlineArrowRight
+          className="rightArrow"
+          onClick={() => handleArrowClick(1)}
+        />
       </div>
       <br />
       <audio controls src={audioSrc}></audio>
